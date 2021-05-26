@@ -1,0 +1,8 @@
+prefix=/home/gemmechu/Documents/Robotics-Course/arm_ws/devel
+
+Name: arm_lib
+Description: Description of arm_lib
+Version: 0.0.0
+Cflags: -I/home/gemmechu/Documents/Robotics-Course/arm_ws/devel/include
+Libs: -L${prefix}/lib 
+Requires: message_runtime

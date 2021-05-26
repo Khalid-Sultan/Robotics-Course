@@ -9,13 +9,11 @@ project(arm_gazebo)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   arm_lib
+  gazebo_ros
   roscpp
   rospy
   std_msgs
-  gazebo_ros
-
 )
-
 find_package(gazebo REQUIRED)
 
 link_directories(${GAZEBO_LIBRARY_DIRS})
@@ -25,9 +23,8 @@ include_directories(${Boost_INCLUDE_DIR}
               ${roscpp_INCLUDE_DIRS}
               ${std_msgs_INCLUDE_DIRS})
 
-add_library(${PROJECT_NAME} SHARED src/controller.cpp)
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
-
+add_library(arm_model_plugin SHARED src/arm_controller.cpp)
+target_link_libraries( arm_model_plugin ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -121,9 +118,8 @@ target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES arm_gazebo
-#  CATKIN_DEPENDS arm_lib roscpp rospy std_msgs
-#  DEPENDS system_lib
-DEPENDS roscpp gazebo_ros arm_lib
+#  CATKIN_DEPENDS gazebo_ros roscpp rospy std_msgs
+  DEPENDS gazebo_ros roscpp arm_lib
 )
 
 ###########
@@ -132,10 +128,10 @@ DEPENDS roscpp gazebo_ros arm_lib
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(
-# # include
-#   ${catkin_INCLUDE_DIRS}
-# )
+include_directories(
+# include
+  ${catkin_INCLUDE_DIRS}
+)
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
