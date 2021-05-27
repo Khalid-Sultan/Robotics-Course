@@ -75,22 +75,23 @@ int main(int argc, char **argv)
     double mult[1][3];
     multiplyMatrices(matrix, rotation_matrix_alpha, mult, 1,3, 3, 3);
 
-    std::cout << mult[0][0] << " " << mult[0][1] << " " << mult[0][2] << std::endl;
+    //std::cout  << "Rotated vector around x axis" << mult[0][0] << " " << mult[0][1] << " " << mult[0][2] << std::endl;
 
     double mult_2[1][3];
     multiplyMatrices(mult, rotation_matrix_beta, mult_2, 1,3, 3, 3);
 
-    std::cout << mult_2[0][0] << " " << mult_2[0][1] << " " << mult_2[0][2] << std::endl;
+    //std::cout  << "Rotated vector around y axis" << mult_2[0][0] << " " << mult_2[0][1] << " " << mult_2[0][2] << std::endl;
 
     double mult_3[1][3];
     multiplyMatrices(mult_2, rotation_matrix_gamma, mult_3, 1,3, 3, 3);
 
-    std::cout << mult_3[0][0] << " " << mult_3[0][1] << " " << mult_3[0][2] << std::endl;
+    //std::cout << "Rotated vector around z axis" << mult_3[0][0] << " " << mult_3[0][1] << " " << mult_3[0][2] << std::endl;
 
     ros_assignment_1::VectorOutput output;
     output.x = mult_3[0][0] + inp.dx; 
     output.y = mult_3[0][1] + inp.dy;
     output.z = mult_3[0][2] + inp.dz;
+    std::cout << "Published transformed vector" << output.x << " " << output.y << " " << output.z << std::endl;
 
     pub.publish(output);
     ros::spinOnce();
