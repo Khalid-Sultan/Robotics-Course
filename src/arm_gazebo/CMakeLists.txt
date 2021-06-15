@@ -25,7 +25,8 @@ include_directories(${Boost_INCLUDE_DIR}
 
 add_library(arm_model_plugin SHARED src/arm_controller.cpp)
 target_link_libraries( arm_model_plugin ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
-
+add_library(gripper_plugin SHARED src/grippercontroller.cpp)
+target_link_libraries( gripper_plugin ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 

@@ -393,10 +393,14 @@
             <child>left_finger</child>
             <parent>palm</parent>
             <axis>
-                <limit>
-                    <lower>-0.4</lower>
-                    <upper>0.4</upper>
-                </limit>
+                <damping>1.0</damping>
+                     <friction>0.3</friction>
+                     <limit>
+                        <lower>-1.0</lower>
+                        <upper>1.0</upper>
+                        <effort>40</effort>
+                        <velocity>1.0</velocity>
+                     </limit> 
                 <xyz>0 0 1</xyz>
             </axis>
         </joint>
@@ -406,16 +410,21 @@
             <child>right_finger</child>
             <parent>palm</parent>
             <axis>
-                <limit>
-                    <lower>-0.4</lower>
-                    <upper>0.4</upper>
-                </limit>
+                <damping>1.0</damping>
+                     <friction>0.3</friction>
+                     <limit>
+                        <lower>-1.0</lower>
+                        <upper>1.0</upper>
+                        <effort>40</effort>
+                        <velocity>1.0</velocity>
+                     </limit> 
                 <xyz>0 0 1</xyz>
             </axis>
         </joint>
         
        
         <plugin name="libarm_model_plugin" filename="libarm_model_plugin.so" />
- 
+        <plugin name="libgripper_plugin" filename="libgripper_plugin.so" />
+        
     </model>
 </sdf>

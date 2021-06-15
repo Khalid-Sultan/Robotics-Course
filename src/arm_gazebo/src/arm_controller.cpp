@@ -77,11 +77,7 @@ namespace gazebo
     void OnUpdate()
    {
       
-      this->SetJointAngle("base_arm1_joint",arm1_angle);
-      this->SetJointAngle("arm1_arm2_joint",arm2_angle);
-      this->SetJointAngle("arm2_arm3_joint",arm3_angle);
-      this->SetJointAngle("arm3_arm4_joint",arm4_angle);
-    
+      
       
 		
   
@@ -91,11 +87,12 @@ namespace gazebo
     void OnRosMsg(const arm_lib::Angles::ConstPtr &_msg)
 
     {
-     
-      arm1_angle  = _msg->arm1_angle;
-      arm2_angle  = _msg->arm2_angle;
-      arm3_angle  = _msg->arm3_angle;
-      arm4_angle  = _msg->arm4_angle;
+     this->SetJointAngle("base_arm1_joint",_msg->arm1_angle);
+      this->SetJointAngle("arm1_arm2_joint",_msg->arm2_angle);
+      this->SetJointAngle("arm2_arm3_joint",_msg->arm3_angle);
+      this->SetJointAngle("arm3_arm4_joint",_msg->arm4_angle);
+    
+      
 
     }
  public:
@@ -126,11 +123,8 @@ namespace gazebo
       }
     }
   
-  private: float arm1_angle = 0; 
-  private: float arm2_angle = 0;
-  private: float arm3_angle = 0; 
-  private: float arm4_angle = 0;
-  private: float degree;
+ 
+  private: float degree =0;
  
   private:
      std::unique_ptr<ros::NodeHandle> rosNode;
