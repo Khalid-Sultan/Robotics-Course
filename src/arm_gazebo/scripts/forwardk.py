@@ -43,8 +43,8 @@ def forward_kinematics(req):
 def forward_kinematics_server():
     rospy.init_node('forward_kinematics_server')
     s = rospy.Service('forward_kinematics', fk, forward_kinematics)
-    print("server ready")
+    print(" forward server ready")
     rospy.spin()
-def invers_kinematics
+
 if __name__ == "__main__":
     forward_kinematics_server()

@@ -1,1 +1,0 @@
-physics::JointState(this->model->GetJoint(joint_name)).Position(0);

@@ -10,6 +10,7 @@
 #include "std_msgs/String.h"
 #include "arm_lib/Angles.h"
 #include  "arm_srv/fk.h"
+#include  "arm_srv/ik.h"
 #include <thread>
 #include <math.h>
 namespace gazebo
@@ -37,7 +38,27 @@ namespace gazebo
    }
   public :
    void inversek(float x, float y ,float z ){
-    
+    ros::ServiceClient client = n.serviceClient<arm_srv::ik>("inverse_kinematics");
+    arm_srv::ik srv;
+    srv.request.x = x;
+    srv.request.y = y;
+    srv.request.z = y;
+    if (client.call(srv))
+			{				
+				ROS_INFO("IK: [%f, %f, %f, %f, %f, %f]", srv.response.angle1, srv.response.angle2, srv.response.angle3, srv.response.angle4, srv.response.angle5, srv.response.palm);
+
+			this->SetJointAngle("base_arm1_joint",srv.response.angle1);
+      this->SetJointAngle("arm1_arm2_joint",srv.response.angle2);
+      this->SetJointAngle("arm2_arm3_joint",srv.response.angle3);
+      this->SetJointAngle("arm3_arm4_joint",srv.response.angle4);
+      this->SetJointAngle("arm4_arm5_joint",srv.response.angle5);
+      this->SetJointAngle("arm5_palm_joint",srv.response.palm);
+			
+			}
+			else
+			{
+				ROS_ERROR("Failed to call service IK");
+			}
    }
   public:
     void Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
@@ -121,6 +142,8 @@ namespace gazebo
       this->SetJointAngle("arm1_arm2_joint",_msg->arm2_angle);
       this->SetJointAngle("arm2_arm3_joint",_msg->arm3_angle);
       this->SetJointAngle("arm3_arm4_joint",_msg->arm4_angle);
+      this->SetJointAngle("arm4_arm5_joint",_msg->arm5_angle);
+      this->SetJointAngle("arm5_palm_joint",_msg->palm_angle);
     
       
 
