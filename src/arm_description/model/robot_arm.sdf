@@ -282,6 +282,7 @@
             <child>palm</child>
             <parent>arm5</parent>
             <axis>
+            
                 <xyz>0 0 1</xyz>
                 <dynamics>
                      
