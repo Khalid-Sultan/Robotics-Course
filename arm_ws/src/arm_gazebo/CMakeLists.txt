@@ -8,11 +8,13 @@ project(arm_gazebo)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  arm_srv
   arm_lib
   gazebo_ros
   roscpp
   rospy
   std_msgs
+
 )
 find_package(gazebo REQUIRED)
 
@@ -25,6 +27,9 @@ include_directories(${Boost_INCLUDE_DIR}
 
 add_library(arm_model_plugin SHARED src/arm_controller.cpp)
 target_link_libraries( arm_model_plugin ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
+add_library(gripper_plugin SHARED src/grippercontroller.cpp)
+target_link_libraries( gripper_plugin ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -119,7 +124,7 @@ catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES arm_gazebo
 #  CATKIN_DEPENDS gazebo_ros roscpp rospy std_msgs
-  DEPENDS gazebo_ros roscpp arm_lib
+  DEPENDS gazebo_ros roscpp arm_lib,arm_srv,rospy
 )
 
 ###########
@@ -172,10 +177,12 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+# 
+catkin_install_python(PROGRAMS
+   scripts/forwardk.py
+   scripts/inversek.py
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html

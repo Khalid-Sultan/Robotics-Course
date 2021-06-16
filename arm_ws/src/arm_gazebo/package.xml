@@ -63,10 +63,14 @@
   <exec_depend>rospy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>arm_lib</exec_depend>
+  
 
 
-  <!-- The export tag contains other, unspecified, tags -->
-  <export>
+<export>
+  <gazebo_ros gazebo_model_path="${prefix}/model"/>
+  <gazebo_ros gazebo_media_path="${prefix}/model"/>
+     <!-- The export tag contains other, unspecified, tags -->
+
     <!-- Other tools can request additional information be placed here -->
  <gazebo_ros plugin_path="${prefix}/lib" gazebo_media_path="${prefix}" />
   </export>
