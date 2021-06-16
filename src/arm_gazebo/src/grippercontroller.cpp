@@ -36,7 +36,7 @@ namespace gazebo
       this->rosNode.reset(new ros::NodeHandle("gazebo_client"));
        
       ros::SubscribeOptions so =
-          ros::SubscribeOptions::create<arm_lib::gripper>(
+          ros::SubscribeOptions::create<std_msgs::StringConstPtr>(
               "/" + this->model->GetName() + "/gripper_angle",
               1,
               boost::bind(&GripperPlugin::OnRosMsg, this, _1),
@@ -54,11 +54,15 @@ namespace gazebo
     } 
   
   public:
-    void OnRosMsg(const arm_lib::gripper::ConstPtr &_msg)
+    void OnRosMsg(const std_msgs::StringConstPtr &_msg)
 
     {
-     this->SetJointAngle("palm_left_finger",_msg->left_finger);
-     this->SetJointAngle("palm_right_finger",_msg->right_finger);
+     std::stringstream ss(_msg->data.c_str());
+     std::string s = ss.str();
+
+     double angle = (s.find("catch") != std::string::npos) ? 0.41 : 0.0;
+     this->SetJointAngle("palm_left_finger",+angle);
+     this->SetJointAngle("palm_right_finger",-angle);
 
     }
  

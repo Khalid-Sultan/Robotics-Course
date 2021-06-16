@@ -111,6 +111,8 @@ namespace gazebo
           this->GetJointPostion("arm1_arm2_joint");
           this->GetJointPostion("arm2_arm3_joint");
           this->GetJointPostion("arm3_arm4_joint");
+          this->GetJointPostion("arm4_arm5_joint");
+          this->GetJointPostion("arm5_palm_joint");
           angle_pub.publish(msg);
            
        }

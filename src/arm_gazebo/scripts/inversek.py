@@ -1,10 +1,10 @@
 from __future__ import print_function
 from  arm_srv.srv import ik,ikResponse
 import rospy
-import tinyik as ik
+import tinyik as Ik
 
 def inverse_kinematics(req):
-    arm = ik.Actuator([
+    arm = Ik.Actuator([
         "z",[0.0,0.0,0.15],
         "x",[0.0,0.0,2.0],
         "x",[0.0,0.0,1.0],
