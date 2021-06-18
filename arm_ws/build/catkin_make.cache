@@ -1,2 +1,2 @@
-arm_description:arm_gazebo:arm_lib
--DCATKIN_DEVEL_PREFIX=/home/gemmechu/Documents/Robotics-Course/arm_ws/devel -DCMAKE_INSTALL_PREFIX=/home/gemmechu/Documents/Robotics-Course/arm_ws/install -G Unix Makefiles
+arm_description:arm_gazebo:arm_lib:arm_srv
+-DCATKIN_DEVEL_PREFIX=/home/tsedeniya/Documents/Robotics Assignment/Robotics-Course/arm_ws/devel -DCMAKE_INSTALL_PREFIX=/home/tsedeniya/Documents/Robotics Assignment/Robotics-Course/arm_ws/install -G Unix Makefiles

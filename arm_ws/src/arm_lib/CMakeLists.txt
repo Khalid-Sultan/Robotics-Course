@@ -52,6 +52,7 @@ add_message_files(
   FILES
   Angles.msg
   gripper.msg
+  points.msg
   
  )
 

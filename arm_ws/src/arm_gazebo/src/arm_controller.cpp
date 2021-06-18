@@ -87,6 +87,7 @@ namespace gazebo
               1,
               boost::bind(&ArmModelPlugin::OnRosMsg, this, _1),
               ros::VoidPtr(), &this->rosQueue);
+      this->postions = n.subscribe("/pos",1000,&ArmModelPlugin::position)
       
       this->rosSub = this->rosNode->subscribe(so);
       this->angle_pub = this->rosNode->advertise<std_msgs::String>("anglepos", 1000);
@@ -111,8 +112,7 @@ namespace gazebo
           this->GetJointPostion("arm1_arm2_joint");
           this->GetJointPostion("arm2_arm3_joint");
           this->GetJointPostion("arm3_arm4_joint");
-          this->GetJointPostion("arm4_arm5_joint");
-          this->GetJointPostion("arm5_palm_joint");
+       
           angle_pub.publish(msg);
            
        }
@@ -135,7 +135,11 @@ namespace gazebo
 		
   
     }
-  
+  public: void position(const arm_lib::points &_msg){
+
+   this->inversek(_msg->x,_msg->y,_msg->z);
+  }
+
   public:
     void OnRosMsg(const arm_lib::Angles::ConstPtr &_msg)
 
@@ -193,7 +197,7 @@ namespace gazebo
     ros::Publisher angle_pub;
 
   private:
-    ros::Subscriber rosSub;
+    ros::Subscriber rosSub,positions;
 
   private:
     ros::CallbackQueue rosQueue;

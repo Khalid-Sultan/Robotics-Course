@@ -66,7 +66,6 @@ namespace gazebo
    void SetJointAngle(std::string joint_name , float angle ){
       float rad = M_PI * angle / 180;
       std::string name = this->model->GetJoint(joint_name)->GetScopedName();
-      this->jointController->SetPositionPID(name, pid);
       this->jointController->SetPositionTarget(name, rad);
       this->jointController->Update();
 

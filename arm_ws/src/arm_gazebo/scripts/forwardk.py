@@ -34,8 +34,7 @@ def forward_kinematics(req):
     M5 = rotataionx(np.radians(req.angle4)).dot(Tz(0.5))
     M6 = rotataiony(np.radians(req.angle5)).dot(Tz(0.1))
     M7 = rotationz(np.radians(req.palm)).dot(Tz(0.1))
-    M8 = Tz(0.3)
-    M = ((((((M1.dot(M2)).dot(M3)).dot(M4)).dot(M5)).dot(M6)).dot(M7)).M8
+    M = ((((((M1.dot(M2)).dot(M3)).dot(M4)).dot(M5)).dot(M6)).dot(M7))
     x = M[0]
     y = M[1]
     z = M[2]
